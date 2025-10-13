@@ -5,7 +5,8 @@ Estimate the pi, piNS/piS, Tajima's D and FST from vcf obtained by poolseq
 This python code is for a machine with 6 CPU and memory of 10gb. No specific python library is required. 
 it's work with the file pop.txt, the vcf files, the files with annotated sites (lyrata_filter_NS.csv and lyrata_filter_S.csv) and the bed files with coordonates of candidate genes.
 
-To run the example, use python poolseq_Genetic_population_program without modification of parameter
+To run the example ERR1822668, unzip files and use python poolseq_Genetic_population_program without modification of parameter
+
 CAREFUL: 
 1) the name of the vcf files must be "GATK_HC_"<name of pop>".vcf"
 2) the name of the csv files with depth by position obtained with samtools must be <name of pop>"_depth.csv"
