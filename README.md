@@ -1,2 +1,26 @@
 # POOLSEQ-analysis-of-polymorphism
 Estimate the pi, piNS/piS, Tajima's D and FST from vcf obtained by poolseq
+
+
+This python code is for a machine with 6 CPU and memory of 10gb. No specific python library is required. 
+it's work with the file pop.txt, the vcf files, the files with annotated sites (lyrata_filter_NS.csv and lyrata_filter_S.csv) and the bed files with coordonates of candidate genes.
+
+To run the example, use python poolseq_Genetic_population_program without modification of parameter
+CAREFUL: 
+1) the name of the vcf files must be "GATK_HC_"<name of pop>".vcf"
+2) the name of the csv files with depth by position obtained with samtools must be <name of pop>"_depth.csv"
+3) the files with 0fold and 4 folds degenerates sites (named lyrata_filter_NS.csv and lyrata_filter_S.csv by default) were obtained with the python code NewAnnotateRef2.py (https://github.com/leveveaudrey/phylogenetic_analyse_brassicacee/blob/main/NewAnnotateRef2.py)
+
+if you want to modify the name of populations analysed, modify the file pop.txt. Many pop could be analysed in parallele if one name by population is specified by line.
+
+this is the list of the parameter that you can modify:
+--bed_file, default="candidate.bed"
+--pop_files, default="pop.txt"
+--annotation_fileNS, default="lyrata_filter_NS.csv"
+--annotation_fileS, default="lyrata_filter_S.csv"
+--directory_vcf, default=""
+--low_cov, default="25"
+--high_cov, default="500"
+--qual, default="10"
+--nb_ind", default="25"
+--ploidy", default="2"
