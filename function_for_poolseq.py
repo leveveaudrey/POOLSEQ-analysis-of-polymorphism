@@ -4,7 +4,7 @@
 
 
 # module require
-import math
+from math import *
 
 # filtration and annotation of studied positions based on mean depth
 
@@ -136,14 +136,14 @@ def pi_gene(pop_files,BED,pi_NS,pi_S,pi):
             
             nb_site=len(pi2)
             if len(pi2)!=0:pi2=sum(pi2)/len(pi2)
-            if len(pi2)==0:pi2="NA"
+            elif len(pi2)==0:pi2="NA"
             if len(piNS)!=0:piNS=sum(piNS)/len(piNS)
-            if len(piNS)==0:piNS="NA"
+            elif len(piNS)==0:piNS="NA"
             if len(piS)!=0:
                 piS=sum(piS)/len(piS)
                 if piS!=0:ratio=float(piNS*1.0/piS)
                 if piS==0:ratio="Inf"
-            if len(piS)==0:
+            elif len(piS)==0:
                 piS="NA"
                 ratio="NA"
             following_line="\n"+str(chrom)+";"+str(start)+";"+str(end)+";"+str(size)+";"+str(nb_site)+";"+str(pi2)+";"+str(piNS)+";"+str(piS)+";"+str(ratio)+";"+str(GENE)+";"+str(Gene_cluster)+";"+str(pop)
@@ -159,7 +159,7 @@ we estimate the tajima D by gene following:
 - a1= sum(1/i) for i between n-1 haplotypes
 - a2= sum(1/i*i) for i between n-1 haplotypes
 - S= number of polymorphic sites
-- theta = S/a
+- theta = S/a1
 - pi2= mean  pi
 - d=pi2-theta
 - b1=(n+1)/3*(n+1)
@@ -206,17 +206,19 @@ def Tajima(BED,pop_files,nb_ind,pi,nb_comp,ploidy):
         
         for pop in pop_files:
             pi2=[]
+            S=0
             for i in range(start,end+1):
                 ID=str(pop)+"_"+str(chrom)+"_"+str(i)
-                S=0
                 if ID in pi.keys():
                     k=float(pi[ID])
                     pi2.append(float(k))
+                    if k>0:
+                        S=S+1
 
                     
-            theta=S/a
+            theta=S/a1
             pi2=sum(pi2)/len(pi2)
-            D=pi2-theta
+            d=pi2-theta
             V=(e1*S)+(e2*S*(S-1))
             V=sqrt(V)
             if V!=0: 
